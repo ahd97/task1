@@ -1,0 +1,98 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="First name" name="firstName" [(ngModel)]="first_name" formControlName="firstName" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lastName" [(ngModel)]="last_name" name="lastName" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your personal details</ng-template>
+        <mat-form-field>
+            <input matInput placeholder="Email" [(ngModel)]="email_id" formControlName="email" required>
+        </mat-form-field><br>
+        <mat-form-field>
+            <input matInput placeholder="Contact" [(ngModel)]="contact_detail" formControlName="contact" required>
+        </mat-form-field><br>
+        <mat-form-field>
+          <input matInput placeholder="Address" [(ngModel)]="addr" formControlName="address" required>
+        </mat-form-field>       
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Skills and other details</ng-template>
+          <label id="example-radio-group-label">Gender</label><br>
+          <mat-radio-group class="radio-group" aria-labelledby="example-radio-group-lable" [(ngModel)]="gend" formControlName="gender" required>
+            <mat-radio-button class="radio-group-button" value="Female">Female</mat-radio-button>
+            <mat-radio-button class="radio-group-button" value="Male">Male</mat-radio-button>
+            <mat-radio-button class="radio-group-button" value="Other">Other</mat-radio-button>
+          </mat-radio-group><br>
+          <label id="education-checkbox-group">Education</label>
+          <div formArrayName="edu" *ngFor="let order of ordersFormArray.controls; let i = index" >
+            <mat-checkbox [formControlName]="i">{{items[i].text}}</mat-checkbox>
+          </div>
+        <div>
+          <label class="radio-group">Hobbies</label>
+          <div class="inline no-select" (click)="newItem = true" *ngIf="!newItem">
+            <mat-icon>add</mat-icon>
+            <span class="new">add new item</span>
+          </div>
+          <form *ngIf="newItem" (submit)="submit()">
+            <input matInput placeholder="Add Hobby" [formControl]="hobby_item">
+            <button type="submit" mat-button>ADD</button>
+          </form>
+          <mat-list>
+            <mat-list-item *ngFor="let h of hobby_list; let i=index">
+              <span>{{h}}</span>
+              <button mat-icon-button (click)="deleteItem(i)">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </div><br>
+
+        <div>
+          <label class="radio-group">Skills</label>
+          <div>
+            <label>HTML</label>
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="html" [(ngModel)]="skill_html"></mat-slider>
+          </div>
+          <div>
+            <label>CSS</label>
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="css" [(ngModel)]="skill_css"></mat-slider>
+          </div>
+          <div>
+            <label>JavaScript</label>
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="js" [(ngModel)]="skill_js"></mat-slider>
+          </div>
+          <div>
+            <label>TypeScript</label>
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="ts" [(ngModel)]="skill_ts"></mat-slider>
+          </div>
+          <div>
+            <label>Angular</label>
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="angular" [(ngModel)]="skill_angular"></mat-slider>
+          </div>
+        </div>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button [disabled]="!thirdFormGroup.valid" (click)="redirect()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>

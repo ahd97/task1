@@ -1,0 +1,13 @@
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .radio-group-button {
+    margin: 5px;
+  }
+
+  .inline .new {
+    margin-left: 8px;
+  }

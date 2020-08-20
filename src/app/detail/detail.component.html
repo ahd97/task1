@@ -1,0 +1,47 @@
+<h1>User Detail</h1>
+<mat-list>
+    <div mat-subheader>Name</div>
+    <mat-list-item>{{first_name}} {{last_name}}</mat-list-item>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Email</div>
+    <mat-list-item>
+        {{email}}
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Contact</div>
+    <mat-list-item>{{contact}}</mat-list-item>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Address</div>
+    <mat-list-item>
+        {{address}}
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Gender</div>
+    <mat-list-item>
+        {{gender}}
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Education</div>
+    <mat-list *ngFor="let edu of education">
+        <mat-list-item>{{edu}}</mat-list-item>
+    </mat-list>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Hobby</div>
+    <mat-list *ngFor="let hobby of hobbies">
+        <mat-list-item>{{hobby}}</mat-list-item>
+    </mat-list>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Skills</div>
+    <mat-list-item>Html: {{skill_html}}</mat-list-item>
+    <mat-list-item>CSS: {{skill_css}}</mat-list-item>
+    <mat-list-item>JavaScript: {{skill_js}}</mat-list-item>
+    <mat-list-item>TypeScript: {{skill_ts}}</mat-list-item>
+    <mat-list-item>Angular: {{skill_angular}}</mat-list-item>
+</mat-list>
