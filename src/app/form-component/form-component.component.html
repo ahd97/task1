@@ -87,6 +87,16 @@
           <label id="education-checkbox-group">Education</label>
           <div formArrayName="edu" *ngFor="let order of ordersFormArray.controls; let i = index" >
             <mat-checkbox [formControlName]="i">{{items[i].text}}</mat-checkbox>
+          </div><br>
+          <div>
+            <div class="inline no-select" (click)="newEdu = true" *ngIf="!newEdu">
+              <mat-icon>add</mat-icon>
+              <span class="new">Other</span>
+            </div>
+            <form *ngIf="newEdu" (submit)="addEdu()">
+              <input matInput placeholder="Type your option" [formControl]="edu_other" required>
+              <button type="submit" mat-button>ADD</button>
+            </form>        
           </div>
         <div>
           <label class="radio-group">Hobbies</label>

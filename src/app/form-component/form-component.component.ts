@@ -37,12 +37,13 @@ export class FormComponentComponent implements OnInit {
   hobby_list:string[]=[];
   user_data:UserData;
   newItem:boolean=false;
-  isLinear = true;
+  newEdu:boolean=false;
+  isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   hobby_item:FormControl=new FormControl();
-  firstName:FormControl;
+  edu_other:FormControl=new FormControl();
 
   constructor(private _formBuilder: FormBuilder, private usr:UserDataServiceService, private router:Router, public dialog:MatDialog) { }
 
@@ -136,6 +137,12 @@ export class FormComponentComponent implements OnInit {
     this.usr.usrData=new UserData(this.first_name,this.last_name,this.email_id,this.contact_detail,this.addr,this.gend,this.education,this.hobby_list,this.skill_html,this.skill_css,this.skill_js,this.skill_ts,this.skill_angular);
     console.log(this.usr.usrData);
     this.router.navigate(['details']);
+  }
+
+  addEdu(){
+    this.newEdu=false;
+    this.items.push({key:"edu"+(this.items.length+1),text:this.edu_other.value});
+    this.ordersFormArray.push(new FormControl(true));
   }
 
 }
