@@ -6,9 +6,9 @@ import { from } from 'rxjs';
 
 
 const routes: Routes = [
+  {path: "", redirectTo: "/form", pathMatch: "full"},
   {path: "form", component: FormComponentComponent},
-  {path: "details", component: DetailComponent},
-  {path: " ", redirectTo: "/form", pathMatch: "full"}
+  {path: "details", component: DetailComponent}
 ];
 
 @NgModule({

@@ -4,6 +4,8 @@ import {UserData} from '../Model/user-data.model'
 import {UserDataServiceService} from '../Provider/user-data-service.service'
 import {Router, NavigationExtras} from "@angular/router";
 import { from } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangehobbydialogComponent } from '../changehobbydialog/changehobbydialog.component';
 
 @Component({
   selector: 'app-form-component',
@@ -40,13 +42,14 @@ export class FormComponentComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   hobby_item:FormControl=new FormControl();
+  firstName:FormControl;
 
-  constructor(private _formBuilder: FormBuilder, private usr:UserDataServiceService, private router:Router) { }
+  constructor(private _formBuilder: FormBuilder, private usr:UserDataServiceService, private router:Router, public dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
-      firstName: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.max(20), Validators.pattern('^[a-zA-Z]+$')]),
-      lastName: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.max(20), Validators.pattern('^[a-zA-Z]+$')])
+      firstName : new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(20), Validators.pattern('^[a-zA-Z]+$')]),
+      lastName: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(20), Validators.pattern('^[a-zA-Z]+$')])
     });
 
     this.secondFormGroup = this._formBuilder.group({
@@ -58,11 +61,11 @@ export class FormComponentComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       gender: new FormControl(null, Validators.required),
       edu: new FormArray([], this.minSelectedCheckboxes(1)),
-      html: new FormControl(null,Validators.min(3)),
-      css: new FormControl(null,Validators.min(3)),
-      js: new FormControl(null,Validators.min(3)),
-      ts: new FormControl(null,Validators.min(3)),
-      angular: new FormControl(null,Validators.min(3)),
+      html: new FormControl(null,Validators.min(4)),
+      css: new FormControl(null,Validators.min(4)),
+      js: new FormControl(null,Validators.min(4)),
+      ts: new FormControl(null,Validators.min(4)),
+      angular: new FormControl(null,Validators.min(4)),
     });
     this.addCheckboxes();
   }
@@ -97,6 +100,19 @@ export class FormComponentComponent implements OnInit {
     this.hobby_item.setValue("");
   }
   
+  editItem(i:number,h:string){
+    const dialogRef = this.dialog.open(ChangehobbydialogComponent, {
+      width: '250px',
+      data: {index:i, hobbies: h}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      h=result;
+      this.hobby_list.splice(i,1,h);
+      console.log(this.hobby_list);
+    });
+  }
+
   deleteItem(index){
     var c = confirm("Do you want to delete this hobby?")
     if(c===true){
@@ -121,4 +137,5 @@ export class FormComponentComponent implements OnInit {
     console.log(this.usr.usrData);
     this.router.navigate(['details']);
   }
+
 }

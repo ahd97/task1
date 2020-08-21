@@ -4,10 +4,34 @@
         <ng-template matStepLabel>Fill out your name</ng-template>
         <mat-form-field>
           <input matInput placeholder="First name" name="firstName" [(ngModel)]="first_name" formControlName="firstName" required>
+          <mat-error *ngIf="firstFormGroup.get('firstName').hasError('required') && (firstFormGroup.get('firstName').dirty || firstFormGroup.get('firstName').touched)">
+            First name is required.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.get('firstName').hasError('minlength') && (firstFormGroup.get('firstName').dirty || firstFormGroup.get('firstName').touched)">
+            Name should contain atleast 3 letter.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.get('firstName').hasError('maxlength') && (firstFormGroup.get('firstName').dirty || firstFormGroup.get('firstName').touched)">
+            Name can't be 20 letters long.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.get('firstName').hasError('pattern') && (firstFormGroup.get('firstName').dirty || firstFormGroup.get('firstName').touched)">
+            Name can't contain numbers and special charecters.
+          </mat-error>
         </mat-form-field>
         <br>
         <mat-form-field>
           <input matInput placeholder="Last name" formControlName="lastName" [(ngModel)]="last_name" name="lastName" required>
+          <mat-error *ngIf="firstFormGroup.get('lastName').hasError('required') && (firstFormGroup.get('lastName').dirty || firstFormGroup.get('lastName').touched)">
+            First name is required.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.get('lastName').hasError('minlength') && (firstFormGroup.get('lastName').dirty || firstFormGroup.get('lastName').touched)">
+            Name should contain atleast 3 letter.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.get('lastName').hasError('maxlength') && (firstFormGroup.get('lastName').dirty || firstFormGroup.get('lastName').touched)">
+            Name can't be 20 letters long.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.get('lastName').hasError('pattern') && (firstFormGroup.get('lastName').dirty || firstFormGroup.get('lastName').touched)">
+            Name can't contain numbers and special charecters.
+          </mat-error>
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
@@ -19,12 +43,27 @@
         <ng-template matStepLabel>Fill out your personal details</ng-template>
         <mat-form-field>
             <input matInput placeholder="Email" [(ngModel)]="email_id" formControlName="email" required>
+            <mat-error *ngIf="secondFormGroup.get('email').hasError('required') && (secondFormGroup.get('email').dirty || secondFormGroup.get('email').touched)">
+              Email is required.
+            </mat-error>
+            <mat-error *ngIf="secondFormGroup.get('email').hasError('pattern') && (secondFormGroup.get('email').dirty || secondFormGroup.get('email').touched)">
+              Email should be in correct format. Ex.- abc@example.com
+            </mat-error>
         </mat-form-field><br>
         <mat-form-field>
             <input matInput placeholder="Contact" [(ngModel)]="contact_detail" formControlName="contact" required>
+            <mat-error *ngIf="secondFormGroup.get('contact').hasError('required') && (secondFormGroup.get('contact').dirty || secondFormGroup.get('contact').touched)">
+              Contact is required.
+            </mat-error>
+            <mat-error *ngIf="secondFormGroup.get('contact').hasError('pattern') && (secondFormGroup.get('contact').dirty || secondFormGroup.get('contact').touched)">
+              Contact should contain only numbers and should contain 10 digits
+            </mat-error>
         </mat-form-field><br>
         <mat-form-field>
           <input matInput placeholder="Address" [(ngModel)]="addr" formControlName="address" required>
+          <mat-error *ngIf="secondFormGroup.get('address').hasError('required') && (secondFormGroup.get('address').dirty || secondFormGroup.get('address').touched)">
+            Address is required.
+          </mat-error>
         </mat-form-field>       
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -40,7 +79,11 @@
             <mat-radio-button class="radio-group-button" value="Female">Female</mat-radio-button>
             <mat-radio-button class="radio-group-button" value="Male">Male</mat-radio-button>
             <mat-radio-button class="radio-group-button" value="Other">Other</mat-radio-button>
-          </mat-radio-group><br>
+          </mat-radio-group>
+          <mat-error *ngIf="thirdFormGroup.get('gender').hasError('required') && thirdFormGroup.invalid">
+            Address is required.
+          </mat-error>
+          <br>
           <label id="education-checkbox-group">Education</label>
           <div formArrayName="edu" *ngFor="let order of ordersFormArray.controls; let i = index" >
             <mat-checkbox [formControlName]="i">{{items[i].text}}</mat-checkbox>
@@ -52,12 +95,15 @@
             <span class="new">add new item</span>
           </div>
           <form *ngIf="newItem" (submit)="submit()">
-            <input matInput placeholder="Add Hobby" [formControl]="hobby_item">
+            <input matInput placeholder="Add Hobby" [formControl]="hobby_item" required>
             <button type="submit" mat-button>ADD</button>
           </form>
           <mat-list>
             <mat-list-item *ngFor="let h of hobby_list; let i=index">
               <span>{{h}}</span>
+              <button mat-icon-button (click)="editItem(index,h)">
+                <mat-icon>edit</mat-icon>
+              </button>
               <button mat-icon-button (click)="deleteItem(i)">
                 <mat-icon>cancel</mat-icon>
               </button>
@@ -70,22 +116,37 @@
           <div>
             <label>HTML</label>
             <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="html" [(ngModel)]="skill_html"></mat-slider>
+            <mat-error *ngIf="thirdFormGroup.get('html').hasError('min') && (thirdFormGroup.get('address').dirty || thirdFormGroup.get('address').touched)">
+             skill should be greater than 3
+            </mat-error>
           </div>
           <div>
             <label>CSS</label>
             <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="css" [(ngModel)]="skill_css"></mat-slider>
+            <mat-error *ngIf="thirdFormGroup.get('css').hasError('min') && (thirdFormGroup.get('address').dirty || thirdFormGroup.get('address').touched)">
+              skill should be greater than 3
+            </mat-error>
           </div>
           <div>
             <label>JavaScript</label>
             <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="js" [(ngModel)]="skill_js"></mat-slider>
+            <mat-error *ngIf="thirdFormGroup.get('js').hasError('min') && (thirdFormGroup.get('address').dirty || thirdFormGroup.get('address').touched)">
+              skill should be greater than 3
+            </mat-error>
           </div>
           <div>
             <label>TypeScript</label>
             <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="ts" [(ngModel)]="skill_ts"></mat-slider>
+            <mat-error *ngIf="thirdFormGroup.get('ts').hasError('min') && (thirdFormGroup.get('address').dirty || thirdFormGroup.get('address').touched)">
+              skill should be greater than 3
+            </mat-error>
           </div>
           <div>
             <label>Angular</label>
             <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" formControlName="angular" [(ngModel)]="skill_angular"></mat-slider>
+            <mat-error *ngIf="thirdFormGroup.get('angular').hasError('min') && (thirdFormGroup.get('address').dirty || thirdFormGroup.get('address').touched)">
+              skill should be greater than 3
+            </mat-error>
           </div>
         </div>
 

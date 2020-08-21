@@ -13,6 +13,7 @@ import {MatListModule} from '@angular/material/list'
 import {MatRadioModule} from '@angular/material/radio'
 import {MatSliderModule} from '@angular/material/slider'
 import {MatFormFieldModule} from '@angular/material/form-field'
+import {MatDialogModule} from '@angular/material/dialog'
 
 import {UserDataServiceService} from './Provider/user-data-service.service'
 
@@ -21,12 +22,14 @@ import { AppComponent } from './app.component';
 import { from } from 'rxjs';
 import { FormComponentComponent } from './form-component/form-component.component';
 import { DetailComponent } from './detail/detail.component';
+import { ChangehobbydialogComponent } from './changehobbydialog/changehobbydialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponentComponent,
-    DetailComponent
+    DetailComponent,
+    ChangehobbydialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { DetailComponent } from './detail/detail.component';
     MatListModule,
     MatRadioModule,
     MatSliderModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule
   ],
   providers: [UserDataServiceService],
   bootstrap: [AppComponent]
