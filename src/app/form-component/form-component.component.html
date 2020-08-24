@@ -111,7 +111,7 @@
           <mat-list>
             <mat-list-item *ngFor="let h of hobby_list; let i=index">
               <span>{{h}}</span>
-              <button mat-icon-button (click)="editItem(index,h)">
+              <button mat-icon-button (click)="editItem(i,h)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button (click)="deleteItem(i)">

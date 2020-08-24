@@ -38,7 +38,7 @@ export class FormComponentComponent implements OnInit {
   user_data:UserData;
   newItem:boolean=false;
   newEdu:boolean=false;
-  isLinear = false;
+  isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
