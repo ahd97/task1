@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Log in</mat-card-title>
+      </mat-card-header>
+  
+      <form class="example-form">
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Username">
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password">
+          </mat-form-field>
+        </mat-card-content>
+
+        <button mat-stroked-button color="accent" class="btn-block">Log in</button><br>
+
+        <div class="vl">
+            <span class="vl-innertext">or</span>
+        </div><br>
+
+        <div>
+            <button class="fb btn" (click)="signInWithFB()">
+                <a>
+                    <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+                </a>
+            </button>
+            <button class="google btn" (click)="signInWithGoogle()">
+                <a>
+                    <i class="fa fa-google fa-fw"></i> Login with Google+
+                </a>
+            </button>
+        </div>
+      </form>
+    </mat-card>
+  
+  </div>
