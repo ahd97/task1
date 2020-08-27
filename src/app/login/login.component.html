@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
 
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <mat-card class="box">
       <mat-card-header>
         <mat-card-title>Log in</mat-card-title>
@@ -9,15 +9,19 @@
       <form class="example-form">
         <mat-card-content>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username">
-          </mat-form-field>
+            <input matInput  placeholder="Email" name="mail" [(ngModel)]="mail">
+          </mat-form-field> <br>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password">
-          </mat-form-field>
+            <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+          </mat-form-field><br>
         </mat-card-content>
 
-        <button mat-stroked-button color="accent" class="btn-block">Log in</button><br>
+        <button mat-stroked-button color="primary" (click)="signInManual()">Log in</button><br>
 
         <div class="vl">
             <span class="vl-innertext">or</span>

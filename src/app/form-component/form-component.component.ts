@@ -6,6 +6,7 @@ import {Router, NavigationExtras} from "@angular/router";
 import { from } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangehobbydialogComponent } from '../changehobbydialog/changehobbydialog.component';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-form-component',
@@ -45,9 +46,13 @@ export class FormComponentComponent implements OnInit {
   hobby_item:FormControl=new FormControl();
   edu_other:FormControl=new FormControl();
 
-  constructor(private _formBuilder: FormBuilder, private usr:UserDataServiceService, private router:Router, public dialog:MatDialog) { }
+  constructor(private _formBuilder: FormBuilder, private usr:UserDataServiceService, private router:Router, public dialog:MatDialog, private authService: SocialAuthService) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem('usr')===null && sessionStorage.getItem('social_usr')===null){
+      this.router.navigate(['login']);
+    }
+    
     this.firstFormGroup = this._formBuilder.group({
       firstName : new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(20), Validators.pattern('^[a-zA-Z]+$')]),
       lastName: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(20), Validators.pattern('^[a-zA-Z]+$')])
@@ -144,5 +149,4 @@ export class FormComponentComponent implements OnInit {
     this.items.push({key:"edu"+(this.items.length+1),text:this.edu_other.value});
     this.ordersFormArray.push(new FormControl(true));
   }
-
 }

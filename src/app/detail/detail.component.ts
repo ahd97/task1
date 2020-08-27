@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {UserData} from '../Model/user-data.model'
 import {UserDataServiceService} from '../Provider/user-data-service.service'
 import { from } from 'rxjs';
+import { Router } from '@angular/router';
+import { SocialAuthService,SocialUser } from 'angularx-social-login';
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
+
 export class DetailComponent implements OnInit {
   first_name:string;
   last_name:string;
@@ -21,9 +25,13 @@ export class DetailComponent implements OnInit {
   skill_js:number;
   skill_ts:number;
   skill_angular:number;
-  constructor(private usr:UserDataServiceService) { }
+  constructor(private usr:UserDataServiceService, private router: Router, private authService: SocialAuthService) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem('usr')===null && sessionStorage.getItem('social_usr')===null){
+      this.router.navigate(['login']);
+    }
+
     this.first_name=this.usr.usrData.firstname;
     this.last_name=this.usr.usrData.lastname;
     this.email=this.usr.usrData.email;

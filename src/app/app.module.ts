@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import {SocialLoginModule,SocialAuthServiceConfig} from 'angularx-social-login'
 import {GoogleLoginProvider,FacebookLoginProvider} from 'angularx-social-login'
 
+import {FlexLayoutModule} from '@angular/flex-layout'
 
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatButtonModule} from '@angular/material/button'
@@ -17,7 +18,8 @@ import {MatRadioModule} from '@angular/material/radio'
 import {MatSliderModule} from '@angular/material/slider'
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatDialogModule} from '@angular/material/dialog'
-import {MatCard, MatCardModule} from '@angular/material/card'
+import {MatCardModule} from '@angular/material/card'
+import {MatToolbarModule} from '@angular/material/toolbar'
 
 import {UserDataServiceService} from './Provider/user-data-service.service'
 
@@ -28,6 +30,7 @@ import { FormComponentComponent } from './form-component/form-component.componen
 import { DetailComponent } from './detail/detail.component';
 import { ChangehobbydialogComponent } from './changehobbydialog/changehobbydialog.component';
 import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { LoginComponent } from './login/login.component';
     FormComponentComponent,
     DetailComponent,
     ChangehobbydialogComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +59,12 @@ import { LoginComponent } from './login/login.component';
     MatFormFieldModule,
     MatDialogModule,
     MatCardModule,
+    MatToolbarModule,
+    FlexLayoutModule,
     SocialLoginModule
   ],
-  providers: [UserDataServiceService,
+  providers: [
+    UserDataServiceService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

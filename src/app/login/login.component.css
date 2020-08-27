@@ -28,7 +28,7 @@
   .vl-innertext {
     position: absolute;
     top: 50%;
-    transform: translate(600%, -50%);
+    transform: translate(500%, -50%);
     background-color: #f1f1f1;
     border: 1px solid #ccc;
     border-radius: 50%;
@@ -40,5 +40,5 @@
     left: 50%;
     transform: translate(-50%);
     border: 2px solid #ddd;
-    width: 500px;
+    width: 400px;
   }
